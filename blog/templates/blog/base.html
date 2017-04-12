@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>LauraWhites blog</title>
+        <!-- Bootstrap -->
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    </head>
+    <body id ="pagina">
+        <div class="page-header">
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+            <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            {% endif %}
+            
+            <h1><a href="/">TLC blog</a></h1>
+            <a href="#" onclick="document.getElementById('pagina').style.backgroundColor='#FFFFC2'; return false;">Change Background</a>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+    </body>
+</html>
